@@ -215,7 +215,7 @@ CREATE TABLE public.uploader (
     avatar text,
     "discordId" bigint,
     admin boolean DEFAULT false NOT NULL,
-    "uploadLimit" smallint DEFAULT 15 NOT NULL,
+    "uploadLimit" smallint DEFAULT 30 NOT NULL,
     upvotes integer DEFAULT 0 NOT NULL,
     password character(60)
 ); ALTER TABLE public.uploader OWNER TO beatmaps;

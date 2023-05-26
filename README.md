@@ -63,3 +63,9 @@ e.g. `cb9f1581ff6c09130c991db8823c5953c660688f.zip` must be in `$ZIP_DIR/c/cb9f1
 This project uses ktlint which provides fairly basic style rules.
 
 You can run the `ktlintFormat` gradle task to automatically apply most of them or the `ktlintCheck` task to get a list of linting errors.
+
+For example, on Windows, navigate to the project's root directory in CMD.
+Execute "gradlew.bat ktlintCheck".
+if successful, you should see "BUILD SUCCESSFUL" in the console.
+If not, you will see a list of linting errors.
+Then execute "gradlew.bat run" to start the server.
