@@ -69,3 +69,9 @@ Execute "gradlew.bat ktlintCheck".
 if successful, you should see "BUILD SUCCESSFUL" in the console.
 If not, you will see a list of linting errors.
 Then execute "gradlew.bat run" to start the server.
+
+## error
+
+**Exception in thread "main" org.flywaydb.core.api.exception.FlywayValidateException: Validate failed. Migration Checksum mismatch for migration version 1**
+- how to fix 
+  - Flyway Repair (gradle flywayRepair)
