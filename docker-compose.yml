@@ -11,3 +11,26 @@ services:
       POSTGRES_USER: beatmaps
       POSTGRES_PASSWORD: "insecure-password"
     restart: always
+
+  rabbitmq:
+      image: rabbitmq:management
+      ports:
+        - "5672:5672"
+        - "15672:15672"
+      volumes:
+        - ./rabbitmq_data:/var/lib/rabbitmq/mnesia
+      environment:
+        RABBITMQ_DEFAULT_USER: bandspace
+        RABBITMQ_DEFAULT_PASS: bandspaceRabbitmq
+      restart: always
+
+volumes:
+      rabbitmq_data:
+        driver: local
+
+
+
+
+
+
+

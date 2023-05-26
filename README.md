@@ -1,5 +1,5 @@
 # Beatsaver
-1
+
 [![Build Status](https://jenkins.kirkstall.top-cat.me/buildStatus/icon?job=Main)](https://jenkins.kirkstall.top-cat.me/view/Beatsaver/job/Main/)
 
 The main codebase for the beatsaver website.
@@ -13,7 +13,11 @@ Contains both backend code for uploading and managing maps, the beatsaver API an
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
 #### Lets go
-- Run `docker-compose up -d` to start the local database
+- Run `docker-compose up -d` to start the local database and RABBITMQ
+- Navigate to http://localhost:15672/
+- Login with 
+  - `bandspace:bandspaceRabbitmq`
+- Create a new virtual host called `bandspace`
 - Open the project in IntelliJ IDEA
 - Run the `run` gradle task
 - Navigate to http://localhost:8080
@@ -21,13 +25,34 @@ Contains both backend code for uploading and managing maps, the beatsaver API an
   - admin:admin
   - test:test
 
+
 #### Extra environment variables
-- `ZIP_DIR` Directory zips will get served from
-- `COVER_DIR` Directory cover images will get served from
 - `AUDIO_DIR` Directory preview audio will get served from
 - `AVATAR_DIR` Directory avatars will get served from
+- `ZIP_DIR` Directory zips will get served from
+- `COVER_DIR` Directory cover images will get served from
 - `PLAYLIST_COVER_DIR` Directory playlist covers will get served from
 - `UPLOAD_DIR` Directory files get uploaded to before being processed
+- `BASE_URL` The base url of the website
+  - example: `http://localhost:8080`
+- `BASE_API_URL` The base url of the api
+  - example: `http://localhost:8080/api`
+- `HOSTNAME` The hostname of the server
+  - example: `BandSpace`
+- `RABBITMQ_HOST` The hostname of the rabbitmq server
+  - example: `127.0.0.1`
+- `RABBITMQ_PORT` The port of the rabbitmq server
+  - example: `5672`
+- `RABBITMQ_USER` The username of the rabbitmq server
+  - example: `bandspace`
+- `RABBITMQ_PASS` The password of the rabbitmq server
+  - example: `bandspaceRabbitmq`
+- `RABBITMQ_VHOST` The vhost of the rabbitmq server
+  - example: `bandspace`
+- `RELAY_HOSTNAME` The hostname of the relay server use SMTP server
+  - example: `smtp.gmail.com`
+- `RELAY_USERNAME` The username of the relay server use SMTP server
+- `RELAY_PASSWORD` The password of the relay server use SMTP server
 
 Zips, covers and audio files must be placed in a subfolder that is named with their first character
 

@@ -119,6 +119,7 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/kotlin,gradle,intellij
 
 /db
+/rabbitmq_data
 geolite2.mmdb
 
 kotlin-js-store/
