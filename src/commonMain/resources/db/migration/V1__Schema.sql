@@ -11,6 +11,13 @@ CREATE TYPE public.characteristic AS ENUM (
     'Lightshow'
 ); ALTER TYPE public.characteristic OWNER TO beatmaps;
 
+CREATE TYPE public.instrument AS ENUM (
+    'Drum',
+    'Keyboard',
+    'Bass',
+    'Guitar'
+); ALTER TYPE public.instrument OWNER TO beatmaps;
+
 CREATE TYPE public.diff AS ENUM (
     'Easy',
     'Normal',
@@ -101,6 +108,7 @@ CREATE TABLE public.difficulty (
     length numeric(10,3) NOT NULL,
     "mapId" integer NOT NULL,
     characteristic public.characteristic NOT NULL,
+    instrument public.instrument NOT NULL,
     difficulty public.diff NOT NULL,
     "difficultyId" integer NOT NULL,
     events integer NOT NULL,

@@ -68,7 +68,7 @@ fun MapVersion.Companion.from(row: ResultRow, cdnPrefix: String) = from(Versions
 
 fun MapDifficulty.Companion.from(other: DifficultyDao) = MapDifficulty(
     other.njs, other.offset, other.notes, other.bombs, other.obstacles, other.nps.toDouble(),
-    other.length.toDouble(), other.characteristic, other.difficulty, other.events, other.chroma, other.me, other.ne, other.cinema, other.seconds.toDouble(), MapParitySummary.from(other),
+    other.length.toDouble(), other.characteristic, other.instrument, other.difficulty, other.events, other.chroma, other.me, other.ne, other.cinema, other.seconds.toDouble(), MapParitySummary.from(other),
     other.stars?.toFloat(), other.maxScore, if (other.label.isNullOrEmpty()) null else other.label
 )
 

@@ -8,14 +8,25 @@ INSERT INTO versions ("mapId", hash, state) VALUES
     ((SELECT "mapId" FROM beatmap WHERE name = 'beat sage map'), 'b', 'Published'),
     ((SELECT "mapId" FROM beatmap WHERE name = 'ranked map'), 'c', 'Published'),
     ((SELECT "mapId" FROM beatmap WHERE name = 'qualified map'), 'd', 'Published');
-INSERT INTO difficulty ("versionId", njs, "offsetTime", notes, bombs, obstacles, nps, length, "mapId", characteristic, difficulty, events, seconds, "pReset", "pWarn", "pError") VALUES
-    ((SELECT "versionId" FROM versions WHERE hash = 'a'), 20, 0, 500, 50, 5, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'a'), 'Standard', 'ExpertPlus', 5000, 120, 0, 0, 0),
-    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 350, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'Standard', 'Expert', 0, 120, 5, 10, 15),
-    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 180, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'OneSaber', 'Expert', 0, 120, 5, 10, 15),
-    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 350, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'NoArrows', 'Expert', 0, 120, 5, 10, 15),
-    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 22, 0, 700, 70, 7, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'ExpertPlus', 700, 180, 0, 0, 0),
-    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 18, 0, 550, 50, 6, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'Expert', 550, 180, 0, 0, 0),
-    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 15, 0, 300, 20, 4, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'Hard', 300, 180, 0, 0, 0),
-    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 21, 0, 750, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'ExpertPlus', 750, 200, 0, 0, 0),
-    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 16, 0, 600, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'Expert', 600, 200, 0, 0, 0),
-    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 12, 0, 300, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'Hard', 300, 200, 0, 0, 0);
+--INSERT INTO difficulty ("versionId", njs, "offsetTime", notes, bombs, obstacles, nps, length, "mapId", characteristic, difficulty, events, seconds, "pReset", "pWarn", "pError") VALUES
+--    ((SELECT "versionId" FROM versions WHERE hash = 'a'), 20, 0, 500, 50, 5, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'a'), 'Standard', 'ExpertPlus', 5000, 120, 0, 0, 0),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 350, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'Standard', 'Expert', 0, 120, 5, 10, 15),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 180, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'OneSaber', 'Expert', 0, 120, 5, 10, 15),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 350, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'NoArrows', 'Expert', 0, 120, 5, 10, 15),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 22, 0, 700, 70, 7, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'ExpertPlus', 700, 180, 0, 0, 0),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 18, 0, 550, 50, 6, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'Expert', 550, 180, 0, 0, 0),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 15, 0, 300, 20, 4, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'Hard', 300, 180, 0, 0, 0),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 21, 0, 750, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'ExpertPlus', 750, 200, 0, 0, 0),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 16, 0, 600, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'Expert', 600, 200, 0, 0, 0),
+--    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 12, 0, 300, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'Hard', 300, 200, 0, 0, 0);
+INSERT INTO difficulty ("versionId", njs, "offsetTime", notes, bombs, obstacles, nps, length, "mapId", characteristic, instrument, difficulty, events, seconds, "pReset", "pWarn", "pError") VALUES
+    ((SELECT "versionId" FROM versions WHERE hash = 'a'), 20, 0, 500, 50, 5, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'a'), 'Standard', 'Drum', 'ExpertPlus', 5000, 120, 0, 0, 0),
+    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 350, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'Standard', 'Drum', 'Expert', 0, 120, 5, 10, 15),
+    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 180, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'OneSaber', 'Keyboard', 'Expert', 0, 120, 5, 10, 15),
+    ((SELECT "versionId" FROM versions WHERE hash = 'b'), 18, 0, 350, 0, 0, 6.5, 120, (SELECT "mapId" FROM versions WHERE hash = 'b'), 'NoArrows', 'Bass', 'Expert', 0, 120, 5, 10, 15),
+    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 22, 0, 700, 70, 7, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'Standard', 'Bass', 'ExpertPlus', 700, 180, 0, 0, 0),
+    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 18, 0, 550, 50, 6, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'OneSaber', 'Drum', 'Expert', 550, 180, 0, 0, 0),
+    ((SELECT "versionId" FROM versions WHERE hash = 'c'), 15, 0, 300, 20, 4, 6.5, 180, (SELECT "mapId" FROM versions WHERE hash = 'c'), 'NoArrows', 'Keyboard', 'Hard', 300, 180, 0, 0, 0),
+    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 21, 0, 750, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'Standard', 'Keyboard', 'ExpertPlus', 750, 200, 0, 0, 0),
+    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 16, 0, 600, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'OneSaber', 'Drum', 'Expert', 600, 200, 0, 0, 0),
+    ((SELECT "versionId" FROM versions WHERE hash = 'd'), 12, 0, 300, 75, 5, 6.5, 200, (SELECT "mapId" FROM versions WHERE hash = 'd'), 'NoArrows', 'Guitar', 'Hard', 300, 200, 0, 0, 0);

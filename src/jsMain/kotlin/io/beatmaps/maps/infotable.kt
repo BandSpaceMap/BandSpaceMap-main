@@ -30,7 +30,8 @@ external interface InfoTableProps : Props {
 }
 
 fun RDOMBuilder<*>.diffImg(diff: MapDifficulty) {
-    val humanText = diff.characteristic.human()
+//    val humanText = diff.characteristic.human()
+    val humanText = diff.instrument.human()
 
     img(humanText, "/static/icons/${humanText.lowercase()}.svg", classes = "mode") {
         attrs.title = diff.difficulty.human() + " " + diff.characteristic.human()
