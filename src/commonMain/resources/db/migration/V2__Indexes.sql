@@ -1,6 +1,6 @@
 ALTER TABLE ONLY public.beatmap ADD CONSTRAINT beatmap_pkey PRIMARY KEY ("mapId");
 ALTER TABLE ONLY public.difficulty ADD CONSTRAINT diff_pk PRIMARY KEY ("difficultyId");
-ALTER TABLE ONLY public.difficulty ADD CONSTRAINT diff_unique UNIQUE ("versionId", characteristic, difficulty);
+ALTER TABLE ONLY public.difficulty ADD CONSTRAINT diff_unique UNIQUE ("versionId", instrument, difficulty);
 ALTER TABLE ONLY public.downloads ADD CONSTRAINT downloads_pkey PRIMARY KEY ("downloadId");
 ALTER TABLE ONLY public.uploader ADD CONSTRAINT hash UNIQUE (hash);
 ALTER TABLE ONLY public.modlog ADD CONSTRAINT modlog_pkey PRIMARY KEY ("logId");
@@ -25,7 +25,7 @@ CREATE INDEX top_score ON public.beatmap USING btree (score) WHERE ("deletedAt" 
 CREATE INDEX votes_since ON public.beatmap USING btree ("lastVoteAt");
 
 CREATE INDEX "diff_createdAt" ON public.difficulty USING btree ("createdAt");
-CREATE UNIQUE INDEX diff_lookup ON public.difficulty USING btree ("versionId", characteristic, difficulty);
+CREATE UNIQUE INDEX diff_lookup ON public.difficulty USING btree ("versionId", instrument, difficulty);
 CREATE INDEX diff_map ON public.difficulty USING btree ("mapId");
 CREATE INDEX diff_search ON public.difficulty USING btree (chroma, nps);
 

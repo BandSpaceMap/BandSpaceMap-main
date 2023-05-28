@@ -9,7 +9,7 @@ import io.beatmaps.common.BSPrettyPrinter
 import io.beatmaps.common.Config
 import io.beatmaps.common.CopyException
 import io.beatmaps.common.MapTag
-import io.beatmaps.common.api.EMapState
+import io.beatmaps.common.api.*
 import io.beatmaps.common.beatsaber.MapInfo
 import io.beatmaps.common.copyToSuspend
 import io.beatmaps.common.db.NowExpression
@@ -65,6 +65,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.OutputStream
 import java.lang.Integer.toHexString
+import java.math.BigDecimal
 import java.math.BigInteger
 import java.nio.file.Files
 import java.security.DigestOutputStream
@@ -219,7 +220,7 @@ fun Route.uploadController() {
                 setFloat(Beatmap.bpm, extractedInfo.mapInfo._beatsPerMinute)
                 setInt(Beatmap.duration, extractedInfo.duration.roundToInt())
                 setString(Beatmap.songName, extractedInfo.mapInfo._songName)
-                setString(Beatmap.songSubName, extractedInfo.mapInfo._songSubName)
+                setString(Beatmap.songSubName, "default")
                 setString(Beatmap.levelAuthorName, extractedInfo.mapInfo._levelAuthorName)
                 setString(Beatmap.songAuthorName, extractedInfo.mapInfo._songAuthorName)
             }
@@ -295,10 +296,10 @@ fun Route.uploadController() {
                     newImageFile.writeBytes(it.toByteArray())
                 } ?: throw UploadException("Internal error 2")
 
-                extractedInfo.preview?.let {
-                    newAudioFile.parentFile?.mkdirs()
-                    newAudioFile.writeBytes(it.toByteArray())
-                } ?: throw UploadException("Internal error 3")
+//                extractedInfo.preview?.let {
+//                    newAudioFile.parentFile?.mkdirs()
+//                    newAudioFile.writeBytes(it.toByteArray())
+//                } ?: throw UploadException("Internal error 3")
 
                 // Pretty much guaranteed to be set
                 val sli = extractedInfo.songLengthInfo ?: throw UploadException("Couldn't determine song length")
@@ -321,10 +322,37 @@ fun Route.uploadController() {
 
                             sharedInsert(it, diffInfo, bsdiff, extractedInfo.mapInfo, sli)
                             it[characteristic] = cLoop.key.enumValue()
+                            it[instrument] = EInstrument.Drum // todo rentianzhu
                             it[difficulty] = dLoop.key.enumValue()
                         }
                     }
                 }
+                
+                extractedInfo.diffInstruments?.forEach { (instrumentName, diffs) ->
+                    diffs.forEachIndexed { index, diff ->
+                        Difficulty.insertAndGetId {
+                            it[njs] = 20.0f // todo delete mock
+                            it[offset] = 0.0f // todo delete mock
+                            it[notes] = 500 // todo delete mock
+                            it[bombs] = 0 // todo delete mock
+                            it[obstacles] = 0 // todo delete mock
+                            it[nps] = BigDecimal(6.5) // todo delete mock
+                            it[length] = BigDecimal(120) // todo delete mock
+                            it[mapId] = newMap
+                            it[characteristic] = ECharacteristic.values()[index] // todo delete mock
+                            it[instrument] = searchEnum<EInstrument>(instrumentName)
+                            it[difficulty] = searchEnum<EDifficulty>(diff._difficulty)
+                            it[versionId] = newVersion
+                            it[events] = 0 // todo delete mock
+                            it[seconds] = BigDecimal(120) // todo delete mock
+                            it[pReset] = 0 // todo delete mock
+                            it[pWarn] = 0 // todo delete mock
+                            it[pError] = 0 // todo delete mock
+                        }
+                    }
+
+                }
+                
                 newMap.value
             } catch (e: Exception) {
                 if (newFile.exists()) newFile.delete()
@@ -344,7 +372,9 @@ fun ZipHelper.validateFiles(dos: DigestOutputStream) =
         ExtractedInfo(findAllowedFiles(it), dos, it, scoreMap())
     }.also { p ->
         // Rename audio file if it ends in .ogg
-        val (newFiles, newFilesOriginalCase) = oggToEgg(p)
+//        val (newFiles, newFilesOriginalCase) = oggToEgg(p)
+        val newFiles = files
+        val newFilesOriginalCase = filesOriginalCase
 
         // Ensure it ends in a slash
         val prefix = infoPrefix()
@@ -354,9 +384,9 @@ fun ZipHelper.validateFiles(dos: DigestOutputStream) =
         // Validate info.dat
         p.mapInfo.validate(withoutPrefix, p, audioFile, ::fromInfo)
         // Generate 10 second preview
-        p.preview = ByteArrayOutputStream().also {
-            it.writeBytes(generatePreview())
-        }
+//        p.preview = ByteArrayOutputStream().also {
+//            it.writeBytes(generatePreview())
+//        }
         // Write updated info.dat back to zip
         infoPath.deleteIfExists()
         getPathDirect("/Info.dat").outputStream().use {
@@ -385,8 +415,8 @@ fun ZipHelper.validateFiles(dos: DigestOutputStream) =
 
 fun findAllowedFiles(info: MapInfo) = (
     listOf("info.dat", "bpminfo.dat", "cinema-video.json", info._coverImageFilename, info._songFilename) +
-        (info._customData?._contributors?.mapNotNull { it._iconPath } ?: listOf()) +
-        info._difficultyBeatmapSets.flatMap { set -> set._difficultyBeatmaps.map { it._beatmapFilename } }
+        (info._customData?._contributors?.mapNotNull { it._iconPath } ?: listOf())
+//            + info._difficultyBeatmapSets.flatMap { set -> set._difficultyBeatmaps.map { it._beatmapFilename } }
     ).map { it.lowercase() }
 
 fun ZipHelper.oggToEgg(info: ExtractedInfo) =

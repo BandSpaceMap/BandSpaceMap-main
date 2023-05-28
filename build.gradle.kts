@@ -201,6 +201,7 @@ flyway {
         locs.add("filesystem:$projectDir/src/commonMain/resources/db/test")
     }
     locations = locs.toTypedArray()
+    cleanDisabled = false
 }
 
 tasks.getByName<CompileSass>("compileSass") {
