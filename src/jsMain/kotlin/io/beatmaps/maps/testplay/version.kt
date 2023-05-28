@@ -333,14 +333,14 @@ class VersionComponent : RComponent<VersionProps, VersionState>() {
                                         if (error) {
                                             i("fas fa-exclamation-circle me-1") {}
                                         }
-                                        +"${it.characteristic.human()} - ${it.difficulty.human()}"
+                                        +"${it.instrument.human()} - ${it.difficulty.human()}"
                                     }
-                                    p {
-                                        textToContent(
-                                            "Notes: ${it.notes}\nBombs: ${it.bombs}\nObstacles: ${it.obstacles}\nEvents: ${it.events}\n" +
-                                                "NPS: ${it.nps}\nParity: ${it.paritySummary.errors} (${it.paritySummary.warns})"
-                                        )
-                                    }
+//                                    p {
+//                                        textToContent(
+//                                            "Notes: ${it.notes}\nBombs: ${it.bombs}\nObstacles: ${it.obstacles}\nEvents: ${it.events}\n" +
+//                                                "NPS: ${it.nps}\nParity: ${it.paritySummary.errors} (${it.paritySummary.warns})"
+//                                        )
+//                                    }
                                 }
                             }
                         }

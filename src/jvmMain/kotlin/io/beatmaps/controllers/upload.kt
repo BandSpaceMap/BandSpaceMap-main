@@ -311,46 +311,48 @@ fun Route.uploadController() {
                     it[sageScore] = extractedInfo.score
                 }
 
-                extractedInfo.diffs.forEach { cLoop ->
-                    cLoop.value.forEach { dLoop ->
-                        val diffInfo = dLoop.key
-                        val bsdiff = dLoop.value
+//                extractedInfo.diffs.forEach { cLoop ->
+//                    cLoop.value.forEach { dLoop ->
+//                        val diffInfo = dLoop.key
+//                        val bsdiff = dLoop.value
+//
+//                        Difficulty.insertAndGetId {
+//                            it[mapId] = newMap
+//                            it[versionId] = newVersion
+//
+//                            sharedInsert(it, diffInfo, bsdiff, extractedInfo.mapInfo, sli)
+//                            it[characteristic] = cLoop.key.enumValue()
+//                            it[instrument] = EInstrument.Drum
+//                            it[difficulty] = dLoop.key.enumValue()
+//                        }
+//                    }
+//                }
 
-                        Difficulty.insertAndGetId {
-                            it[mapId] = newMap
-                            it[versionId] = newVersion
-
-                            sharedInsert(it, diffInfo, bsdiff, extractedInfo.mapInfo, sli)
-                            it[characteristic] = cLoop.key.enumValue()
-                            it[instrument] = EInstrument.Drum // todo rentianzhu
-                            it[difficulty] = dLoop.key.enumValue()
-                        }
-                    }
-                }
-                
+                uploadLogger.info("diffInstruments")
                 extractedInfo.diffInstruments?.forEach { (instrumentName, diffs) ->
-                    diffs.forEachIndexed { index, diff ->
+
+                    for (diff in diffs) {
                         Difficulty.insertAndGetId {
-                            it[njs] = 20.0f // todo delete mock
-                            it[offset] = 0.0f // todo delete mock
-                            it[notes] = 500 // todo delete mock
-                            it[bombs] = 0 // todo delete mock
-                            it[obstacles] = 0 // todo delete mock
-                            it[nps] = BigDecimal(6.5) // todo delete mock
-                            it[length] = BigDecimal(120) // todo delete mock
+                            it[njs] = 20.0f // 由于删除这个比较麻烦，故随便写个默认值
+                            it[offset] = 0.0f // 由于删除这个比较麻烦，故随便写个默认值
+                            it[notes] = 500 // 由于删除这个比较麻烦，故随便写个默认值
+                            it[bombs] = 0 // 由于删除这个比较麻烦，故随便写个默认值
+                            it[obstacles] = 0 // 由于删除这个比较麻烦，故随便写个默认值
+                            it[nps] = BigDecimal(6.5) // 由于删除这个比较麻烦，故随便写个默认值
+                            it[length] = BigDecimal(120) // 由于删除这个比较麻烦，故随便写个默认值
                             it[mapId] = newMap
-                            it[characteristic] = ECharacteristic.values()[index] // todo delete mock
+                            it[characteristic] = ECharacteristic.Standard
                             it[instrument] = searchEnum<EInstrument>(instrumentName)
                             it[difficulty] = searchEnum<EDifficulty>(diff._difficulty)
                             it[versionId] = newVersion
-                            it[events] = 0 // todo delete mock
-                            it[seconds] = BigDecimal(120) // todo delete mock
-                            it[pReset] = 0 // todo delete mock
-                            it[pWarn] = 0 // todo delete mock
-                            it[pError] = 0 // todo delete mock
+                            it[events] = 0 // 由于删除这个比较麻烦，故随便写个默认值
+                            it[seconds] = BigDecimal(120) // 由于删除这个比较麻烦，故随便写个默认值
+                            it[pReset] = 0 // 由于删除这个比较麻烦，故随便写个默认值
+                            it[pWarn] = 0 // 由于删除这个比较麻烦，故随便写个默认值
+                            it[pError] = 0 // 由于删除这个比较麻烦，故随便写个默认值
                         }
+                        break // 只取第一个，故break
                     }
-
                 }
                 
                 newMap.value
