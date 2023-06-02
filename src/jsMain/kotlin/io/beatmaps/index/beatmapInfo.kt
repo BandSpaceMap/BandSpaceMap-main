@@ -147,7 +147,6 @@ class BeatmapInfo : AutoSizeComponent<MapDetail, BeatmapInfoProps, BeatMapInfoSt
                             }
                         }
                         img(src = props.version?.coverURL, alt = "Cover Image", classes = "cover") {
-                            console.error(props.version?.coverURL)
                             attrs.width = "100"
                             attrs.height = "100"
                         }
