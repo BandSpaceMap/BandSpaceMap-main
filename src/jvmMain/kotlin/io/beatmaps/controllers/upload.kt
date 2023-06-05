@@ -343,7 +343,7 @@ fun Route.uploadController() {
                             it[mapId] = newMap
                             it[characteristic] = ECharacteristic.Standard
                             it[instrument] = searchEnum<EInstrument>(instrumentName)
-                            it[difficulty] = searchEnum<EDifficulty>(diff._difficulty)
+                            it[difficulty] = EDifficulty.fromInt(diff._difficultyRank) ?: EDifficulty.Easy
                             it[versionId] = newVersion
                             it[events] = 0 // 由于删除这个比较麻烦，故随便写个默认值
                             it[seconds] = BigDecimal(120) // 由于删除这个比较麻烦，故随便写个默认值
