@@ -149,6 +149,7 @@ fun Route.uploadController() {
             uploadDir,
             "upload-${System.currentTimeMillis()}-${session.userId.hashCode()}.zip"
         )
+        val uploadCopy = File(uploadDir, "upload-${System.currentTimeMillis()}-${session.userId.hashCode()}-copy.zip")
 
         val md = MessageDigest.getInstance("SHA1")
         var extractedInfoTmp: ExtractedInfo? = null
@@ -161,6 +162,7 @@ fun Route.uploadController() {
                         its.copyToSuspend(it, sizeLimit = currentLimit * 1024 * 1024)
                     }.run {
                         // Check if the file exists
+                        Files.copy(file.toPath(), uploadCopy.toPath())
                         DigestOutputStream(OutputStream.nullOutputStream(), md).use { dos ->
                             openZip(file) {
                                 validateFiles(dos)
@@ -284,7 +286,7 @@ fun Route.uploadController() {
                     }
 
                     newFile.parentFile?.mkdirs()
-                    Files.move(file.toPath(), newFile.toPath())
+                    Files.move(uploadCopy.toPath(), newFile.toPath())
                 }
             } catch (e: Exception) {
                 file.delete()
@@ -358,6 +360,7 @@ fun Route.uploadController() {
                 newMap.value
             } catch (e: Exception) {
                 if (newFile.exists()) newFile.delete()
+                if (uploadCopy.exists()) uploadCopy.delete()
                 if (newImageFile.exists()) newImageFile.delete()
                 if (newAudioFile.exists()) newAudioFile.delete()
                 throw e
