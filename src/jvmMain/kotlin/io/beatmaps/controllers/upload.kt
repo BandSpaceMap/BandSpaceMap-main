@@ -9,7 +9,11 @@ import io.beatmaps.common.BSPrettyPrinter
 import io.beatmaps.common.Config
 import io.beatmaps.common.CopyException
 import io.beatmaps.common.MapTag
-import io.beatmaps.common.api.*
+import io.beatmaps.common.api.ECharacteristic
+import io.beatmaps.common.api.EDifficulty
+import io.beatmaps.common.api.EInstrument
+import io.beatmaps.common.api.EMapState
+import io.beatmaps.common.api.searchEnum
 import io.beatmaps.common.beatsaber.MapInfo
 import io.beatmaps.common.copyToSuspend
 import io.beatmaps.common.db.NowExpression
@@ -31,7 +35,6 @@ import io.beatmaps.common.zip.RarException
 import io.beatmaps.common.zip.ZipHelper
 import io.beatmaps.common.zip.ZipHelper.Companion.openZip
 import io.beatmaps.common.zip.ZipHelperException
-import io.beatmaps.common.zip.sharedInsert
 import io.beatmaps.genericPage
 import io.beatmaps.login.Session
 import io.ktor.http.HttpStatusCode
@@ -61,7 +64,6 @@ import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.OutputStream
 import java.lang.Integer.toHexString
@@ -354,7 +356,7 @@ fun Route.uploadController() {
                         break // 只取第一个，故break
                     }
                 }
-                
+
                 newMap.value
             } catch (e: Exception) {
                 if (newFile.exists()) newFile.delete()

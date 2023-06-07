@@ -2,7 +2,11 @@
 package io.beatmaps.api
 
 import io.beatmaps.common.MapTag
-import io.beatmaps.common.api.*
+import io.beatmaps.common.api.ECharacteristic
+import io.beatmaps.common.api.ECharacteristicSerializer
+import io.beatmaps.common.api.EDifficulty
+import io.beatmaps.common.api.EInstrument
+import io.beatmaps.common.api.EMapState
 import io.beatmaps.common.fixed
 import kotlinx.datetime.Instant
 import kotlinx.serialization.KSerializer
