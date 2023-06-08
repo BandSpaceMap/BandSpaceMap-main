@@ -46,9 +46,9 @@ class CDN {
     data class AvatarSimple(val user: String, val api: CDN)
     @Location("/beatsaver/{file}.zip")
     data class BeatSaver(val file: String, val api: CDN)
-    @Location("/{file}.mp3")
+    @Location("/{file}.ogg")
     data class Audio(val file: String, val api: CDN)
-    @Location("/beatsaver/{file}.mp3")
+    @Location("/beatsaver/{file}.ogg")
     data class BSAudio(val file: String, val api: CDN)
     @Location("/playlist/{file}.jpg")
     data class PlaylistCover(val file: String, val api: CDN)
@@ -188,5 +188,5 @@ fun Route.cdnRoute() {
 
 suspend fun PipelineContext<Unit, ApplicationCall>.getAudio(hash: String) =
     returnFile(
-        File(localAudioFolder(hash), "$hash.mp3")
+        File(localAudioFolder(hash), "$hash.ogg")
     )

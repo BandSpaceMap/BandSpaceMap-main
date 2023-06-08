@@ -60,7 +60,7 @@ fun MapVersion.Companion.from(other: VersionsDao, cdnPrefix: String) =
             other.difficulties.values.map { MapDifficulty.from(it) }.sortedWith(compareBy(MapDifficulty::characteristic, MapDifficulty::difficulty)), other.feedback,
             other.testplayAt?.toKotlinInstant(), if (other.testplays.isEmpty()) null else other.testplays.values.map { MapTestplay.from(it) },
             "${Config.cdnBase(zipPrefix, true)}/${other.hash}.zip", "${Config.cdnBase(actualPrefix, true)}/${other.hash}.jpg",
-            "${Config.cdnBase(actualPrefix, true)}/${other.hash}.mp3",
+            "${Config.cdnBase(actualPrefix, true)}/${other.hash}.ogg",
             other.scheduledAt?.toKotlinInstant()
         )
     }
