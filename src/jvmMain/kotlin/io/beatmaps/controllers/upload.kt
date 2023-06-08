@@ -64,6 +64,7 @@ import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.OutputStream
 import java.lang.Integer.toHexString
