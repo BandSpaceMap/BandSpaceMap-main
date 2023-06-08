@@ -42,7 +42,7 @@ class BeatsageCleanse : TimerTask() {
                     val digest = version.hash
                     val file = File(localFolder(digest), "$digest.zip")
                     val imageFile = File(localCoverFolder(digest), "$digest.jpg")
-                    val audioFile = File(localAudioFolder(digest), "$digest.mp3")
+                    val audioFile = File(localAudioFolder(digest), "$digest.ogg")
 
                     file.delete()
                     imageFile.delete()

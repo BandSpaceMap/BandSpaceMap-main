@@ -196,7 +196,7 @@ fun Route.uploadController() {
             val digest = String.format(fx, BigInteger(1, md.digest()))
             val newFile = File(localFolder(digest), "$digest.zip")
             val newImageFile = File(localCoverFolder(digest), "$digest.jpg")
-            val newAudioFile = File(localAudioFolder(digest), "$digest.mp3")
+            val newAudioFile = File(localAudioFolder(digest), "$digest.ogg")
 
             val existsAlready = Versions.select {
                 Versions.hash eq digest
@@ -298,10 +298,10 @@ fun Route.uploadController() {
                     newImageFile.writeBytes(it.toByteArray())
                 } ?: throw UploadException("Internal error 2")
 
-//                extractedInfo.preview?.let {
-//                    newAudioFile.parentFile?.mkdirs()
-//                    newAudioFile.writeBytes(it.toByteArray())
-//                } ?: throw UploadException("Internal error 3")
+                extractedInfo.preview?.let {
+                    newAudioFile.parentFile?.mkdirs()
+                    newAudioFile.writeBytes(it.toByteArray())
+                } ?: throw UploadException("Internal error 3")
 
                 // Pretty much guaranteed to be set
                 val sli = extractedInfo.songLengthInfo ?: throw UploadException("Couldn't determine song length")
@@ -389,9 +389,9 @@ fun ZipHelper.validateFiles(dos: DigestOutputStream) =
         // Validate info.dat
         p.mapInfo.validate(withoutPrefix, p, audioFile, ::fromInfo)
         // Generate 10 second preview
-//        p.preview = ByteArrayOutputStream().also {
-//            it.writeBytes(generatePreview())
-//        }
+        p.preview = ByteArrayOutputStream().also {
+            it.writeBytes(generatePreview())
+        }
         // Write updated info.dat back to zip
         infoPath.deleteIfExists()
         getPathDirect("/Info.dat").outputStream().use {
