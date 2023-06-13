@@ -131,7 +131,7 @@ fun main() {
             .migrate()
     }
 
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::beatmapsio).start(wait = true)
+    embeddedServer(Netty, port = 8888, host = "0.0.0.0", module = Application::beatmapsio).start(wait = true)
 }
 
 data class ErrorResponse(val error: String)
