@@ -32,7 +32,7 @@ external object ReCAPTCHA {
 
 fun RBuilder.recaptcha(captchaRef: RefObject<ReCAPTCHA>) {
     ReCAPTCHA.default {
-        attrs.sitekey = "6LdXlJYmAAAAAD49u5GCZgoMARwQUSb5ZjDDmnrB"
+        attrs.sitekey = "6LdN6pYmAAAAAGaDiZSZLX9lLuoOfPhZSjHgaYdK"
         attrs.size = "invisible"
         ref = captchaRef
     }
