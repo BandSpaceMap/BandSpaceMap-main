@@ -435,7 +435,7 @@ fun Route.userRoute() {
 
                     sendEmail(
                         req.email,
-                        "BeatSaver Password Reset",
+                        "BandSpace Map Password Reset",
                         "You can reset your password for the account `${user.uniqueName}` by clicking here: ${Config.siteBase()}/reset/$jwt\n\n" +
                             "If this wasn't you then you can safely ignore this email."
                     )
